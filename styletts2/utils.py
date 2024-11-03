@@ -288,17 +288,19 @@ def get_voice_list(dir=get_voice_dir(), append_defaults=False, extensions=["wav"
 	
 	return res
 
-def load_models_webui(sigma_value, device="cpu", configuration_path="Models/model_paths.yml"):
+def load_models_webui(sigma_value, device="cpu", configuration_path="model_paths.yml"):
+    lib_path = os.path.dirname(os.path.abspath(__file__))
+    configuration_path = os.path.join(lib_path, configuration_path)
     config = load_configurations(configuration_path)
-    ASR_config = config.get('ASR_config', False)
-    ASR_path = config.get('ASR_path', False)
+    ASR_config = os.path.join(lib_path, config.get('ASR_config', False))
+    ASR_path = os.path.join(lib_path, config.get('ASR_path', False))
     text_aligner = load_ASR_models(ASR_path, ASR_config)
 
-    F0_path = config.get('F0_path', False)
+    F0_path = os.path.join(lib_path, config.get('F0_path', False))
     pitch_extractor = load_F0_models(F0_path)
 
-    BERT_path = config.get('PLBERT_dir', False)
-    from Utils.PLBERT.util import load_plbert
+    BERT_path = os.path.join(lib_path, config.get('PLBERT_dir', False))
+    from styletts2.Utils.PLBERT.util import load_plbert
     plbert = load_plbert(BERT_path)
 
     model_params = recursive_munch(config['model_params'])
