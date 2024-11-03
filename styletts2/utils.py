@@ -84,11 +84,15 @@ def log_print(message, logger):
     
     
 def set_seeds(seed=0):
-    torch.manual_seed(seed)
+    if seed==-1:
+        seed_value = random.randint(0, 2**32 - 1)
+    else:
+        seed_value = seed
+    torch.manual_seed(seed_value)
     torch.backends.cudnn.benchmark = False
     torch.backends.cudnn.deterministic = True
-    random.seed(seed)
-    np.random.seed(seed)
+    random.seed(seed_value)
+    np.random.seed(seed_value)
     
 def load_configurations(config_path):
     return yaml.safe_load(open(config_path))
