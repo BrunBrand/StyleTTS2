@@ -117,7 +117,7 @@ def load_models(config, device):
     return model, model_params
 
 def load_pretrained_model(model, model_path):
-    params_whole = torch.load(model_path, map_location='cpu')
+    params_whole = torch.load(model_path, map_location='cpu', weights_only=False)
     params = params_whole['net']
     for key in model:
         if key in params:
