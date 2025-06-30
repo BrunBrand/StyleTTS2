@@ -202,7 +202,7 @@ def compute_style(path, model, to_mel, mean, std, device):
 # TODO phonemizer incompatible with multilanguage configuration
 def load_phonemizer():
     return phonemizer.backend.EspeakBackend(
-        language="en-us", preserve_punctuation=True, with_stress=True
+        language="pt-br", preserve_punctuation=True, with_stress=True
     )
 
 

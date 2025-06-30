@@ -184,7 +184,7 @@ def main():
     model, model_params = load_models(config, device)
 
     global global_phonemizer
-    global_phonemizer = phonemizer.backend.EspeakBackend(language='en-us', preserve_punctuation=True, with_stress=True)
+    global_phonemizer = phonemizer.backend.EspeakBackend(language='pt-br', preserve_punctuation=True, with_stress=True)
 
     sampler = create_sampler(model)
     textclenaer = TextCleaner()
